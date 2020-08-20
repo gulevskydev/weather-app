@@ -1,0 +1,93 @@
+.days
+    padding: 2rem
+.dot 
+    margin: 0 5px 
+
+.cities 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+
+    &__weather 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 3rem;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.1);
+        transition: all 0.2s;
+        cursor: pointer;
+        margin-bottom: 3rem
+
+       
+
+        &:hover 
+            transform: translateY(-2px);
+            box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.05);
+        
+
+        &:active 
+            transform: translateY(2px);
+            box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.15);
+        
+
+        &>*:not(:last-child) 
+            margin-bottom: 1rem;
+        
+
+        &__name 
+            font-size: 1.7rem;
+            font-weight: 500;
+            text-align: center;
+        &__details 
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            &--icon 
+                width: 7rem;
+                height: auto;
+                margin-right: 2rem;
+            &__text 
+                display: flex;
+                flex-direction: column;
+                margin-right: auto;
+                color: #999
+                
+
+
+            &--phrase 
+                color: #3aafa9
+                font-size: 1.6rem;
+                line-height: 1;
+                margin-bottom: 3px;
+            &--minmax 
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                color: #999
+                font-size: 1.2rem;
+            &__temp 
+                color: #2b7a78
+                font-size: 3.5rem;
+                line-height: 1;
+                font-weight: 300;
+.close-popup 
+    align-self: flex-end;
+    color: red
+    display: flex;
+    top: 2rem;
+    right: 2rem;
+    position: absolute;
+    &--icon 
+        cursor:pointer!important
+        width: 1.5rem;
+        height: 1.5rem;
+
+.title__text--subtitle
+    align-self: center;
+    font-size: 1.5rem;
+    font-weight: 400;                
+    color: #999
