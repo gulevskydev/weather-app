@@ -6,6 +6,7 @@ import Forecast from "./components/forecast/Forecast";
 import Others from "./components/others/Others";
 import AddTown from "./components/addTown/AddTown";
 import Loader from "./components/loader/loader";
+import DarkMode from "./components/darkMode/darkMode";
 
 class App extends Component {
   state = {
@@ -16,6 +17,7 @@ class App extends Component {
     detailsCurrentWeather: null,
     detailsByCity: false,
     loader: true,
+    dark: false,
   };
 
   componentDidMount = () => {
@@ -40,9 +42,13 @@ class App extends Component {
     navigator.geolocation.getCurrentPosition(success, error);
 
     const savedCities = JSON.parse(localStorage.getItem("savedCities"));
+    const savedTheme = JSON.parse(localStorage.getItem("theme"));
+
     if (savedCities) {
       this.setState({ cities: savedCities });
     }
+    savedTheme ? this.addDarkMode() : this.removeDarkMode();
+    this.setState({ dark: savedTheme });
   };
 
   handleClick = () => {
@@ -105,6 +111,21 @@ class App extends Component {
       });
   };
 
+  handleChangeDarkMode = () => {
+    const darkMode = this.state.dark === true ? false : true;
+    this.setState({ dark: darkMode });
+    darkMode ? this.addDarkMode() : this.removeDarkMode();
+    localStorage.setItem("theme", JSON.stringify(darkMode));
+  };
+
+  addDarkMode = () => {
+    document.body.classList.add("dark");
+  };
+
+  removeDarkMode = () => {
+    document.body.classList.remove("dark");
+  };
+
   handleDeleteCities = () => {
     this.setState({ cities: [] });
     localStorage.removeItem("savedCities");
@@ -131,27 +152,33 @@ class App extends Component {
     const renderMainPage = () => {
       return (
         <React.Fragment>
-          <CurrentWeather
-            isMainPage={this.state.mainPage}
-            curLocation={this.state.currentLoc}
-            data={this.state.data}
-            onOpen={this.handleClick}
+          <DarkMode
+            onChangeTheme={this.handleChangeDarkMode}
+            checked={this.state.dark}
           />
-          {this.state.isOpen ? (
-            <Forecast
-              data={this.state.detailsCurrentWeather}
-              onClose={this.handleClose}
-            />
-          ) : (
-            <Others
-              onAddTown={this.handleAddNewTown}
-              searched={this.state.searched}
+          <div className="container">
+            <CurrentWeather
+              isMainPage={this.state.mainPage}
+              curLocation={this.state.currentLoc}
               data={this.state.data}
-              cities={this.state.cities}
-              onClickCityDetails={this.clickDetailsByCity}
-              onDeleteCities={this.handleDeleteCities}
+              onOpen={this.handleClick}
             />
-          )}
+            {this.state.isOpen ? (
+              <Forecast
+                data={this.state.detailsCurrentWeather}
+                onClose={this.handleClose}
+              />
+            ) : (
+              <Others
+                onAddTown={this.handleAddNewTown}
+                searched={this.state.searched}
+                data={this.state.data}
+                cities={this.state.cities}
+                onClickCityDetails={this.clickDetailsByCity}
+                onDeleteCities={this.handleDeleteCities}
+              />
+            )}
+          </div>
         </React.Fragment>
       );
     };

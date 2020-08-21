@@ -1,14 +1,3 @@
-// $color-primary: #2b7a78;
-// $color-primary-light: #3aafa9;
-// $color-primary-dark: #17252a;
-// $color-grey-dark-1: #333;
-// $color-grey-dark-2: #777;
-// $color-grey-dark-3: #999;
-// $color-grey-light: #ffffff;
-// $color-red-error: #ff5959;
-// $shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
-// $shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.1);
-  
 * 
   margin: 0;
   padding: 0;
@@ -34,7 +23,7 @@ body
   transition: all 0.4s;
   justify-content: center;
     
-#root
+.container
   width: 100%
   max-width: 40rem
   display: flex
@@ -48,3 +37,78 @@ body
   margin-bottom: 4rem
   font-size: 1.3em
 
+.dark 
+  background-color:#17252a
+  color: #ffffff;
+
+  & .title 
+    &__icon 
+      fill: #ffffff;
+    
+
+    &__text 
+      color: #ffffff;
+    
+
+  & .title__text--subtitle 
+    color: #ffffff;
+  
+
+  & .main__weather 
+    background-color: #2b7a78;
+
+    &__text 
+      &--phrase 
+        color: #ffffff
+      &--minmax
+        color:#17252a 
+      
+    
+
+    &__details--temp 
+      color:#17252a 
+   
+
+  & .cities__weather 
+    background-color: #2b7a78;
+
+    &__details 
+      &__text 
+        &--phrase 
+          color: #ffffff
+        
+
+        &--minmax 
+          color:#17252a
+     
+
+      &__temp 
+        color:#17252a
+
+
+  & .add__city--icon 
+    fill: #ffffff;
+  
+
+  & .search__results__single 
+    background-color: #2b7a78;
+
+    &--country 
+      color:#17252a
+    
+
+    &--city 
+      color: #ffffff;
+    
+
+    &.saved 
+      background-color: #ffffff;
+ 
+
+  & .saved .search__results__single--city 
+    color: #2b7a78;
+  
+
+  & .search__form__input 
+    color: #ffffff;
+ 
