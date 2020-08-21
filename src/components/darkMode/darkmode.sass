@@ -1,0 +1,48 @@
+.darkmode
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    &__text
+        margin-right: 1rem;
+        font-weight: 700;
+        font-size: 1.2rem;
+input[type='checkbox']
+    height: 0;
+    width: 0;
+    visibility: hidden;
+input  
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+
+label    
+    position: relative;
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 25px;
+    background: grey;
+    display: block;
+    border-radius: 100px;   
+    &::after
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 5px;
+        width: 17px;
+        height: 17px;
+        background: #fff;
+        border-radius: 90px;
+        transition: all 0.5s;
+input:checked + label
+    background: #2b7a78
+input:checked + label:after
+    left: calc(100% - 5px);
+    transform: translateX(-100%);  
+
+label:active:after
+    width: 40px
+
