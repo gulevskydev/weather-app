@@ -56,7 +56,11 @@ export class AddTown extends Component {
             />
           </form>
         </div>
-        <div className="search__results">{renderResults()}</div>
+        {this.props.errSearch ? (
+          <h2 className="error"> No such city, please type correct name</h2>
+        ) : (
+          <div className="search__results">{renderResults()}</div>
+        )}
       </div>
     );
   }

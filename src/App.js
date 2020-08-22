@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import CurrentWeather from "./components/currentWeather/CurrentWeather";
-import config from "./config.json";
 import "./App.sass";
 import Forecast from "./components/forecast/Forecast";
 import Others from "./components/others/Others";
@@ -18,18 +17,20 @@ class App extends Component {
     detailsByCity: false,
     loader: true,
     dark: false,
+    error: false,
+    errSearch: false,
   };
 
   componentDidMount = () => {
-    function error(err) {
-      return <h1>`You have been decline your current position`;</h1>;
-    }
+    const error = (err) => {
+      this.setState({ error: true });
+    };
 
     const success = (position) => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       fetch(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${config.APIKEY}`
+        `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${process.env.REACT_APP_APIKEY}`
       )
         .then((response) => response.json())
         .then((data) =>
@@ -56,7 +57,7 @@ class App extends Component {
       const data = this.state.data.name;
 
       fetch(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${data}&units=metric&appid=${config.APIKEY} `
+        `http://api.openweathermap.org/data/2.5/forecast?q=${data}&units=metric&appid=${process.env.REACT_APP_APIKEY} `
       )
         .then((response) => response.json())
         .then((data) =>
@@ -94,9 +95,15 @@ class App extends Component {
 
   handleSearch = (name) => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${name}&units=metric&appid=${config.APIKEY}`
+      `http://api.openweathermap.org/data/2.5/weather?q=${name}&units=metric&appid=${process.env.REACT_APP_APIKEY}`
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
       .then((data) => {
         if (
           this.state.cities.filter((city) => city.name === data.name).length > 0
@@ -107,7 +114,11 @@ class App extends Component {
         this.setState({
           city: data,
           searched: data.name,
+          errSearch: false,
         });
+      })
+      .catch((err) => {
+        this.setState({ errSearch: true });
       });
   };
 
@@ -157,12 +168,18 @@ class App extends Component {
             checked={this.state.dark}
           />
           <div className="container">
-            <CurrentWeather
-              isMainPage={this.state.mainPage}
-              curLocation={this.state.currentLoc}
-              data={this.state.data}
-              onOpen={this.handleClick}
-            />
+            {this.state.error ? (
+              <h1 className="error">
+                You have been decline your current position
+              </h1>
+            ) : (
+              <CurrentWeather
+                isMainPage={this.state.mainPage}
+                curLocation={this.state.currentLoc}
+                data={this.state.data}
+                onOpen={this.handleClick}
+              />
+            )}
             {this.state.isOpen ? (
               <Forecast
                 data={this.state.detailsCurrentWeather}
@@ -192,13 +209,14 @@ class App extends Component {
             onClickOnCity={this.handleClickOnCity}
             onClose={this.handleClose}
             city={this.state.city}
+            errSearch={this.state.errSearch}
           />
         </React.Fragment>
       );
     };
 
     // Rendering page
-    if (this.state.data) {
+    if (this.state.data || this.state.error) {
       if (this.state.addNew) {
         return renderSearchPage();
       } else {
