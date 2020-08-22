@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "../title/title.sass";
 import "./others.sass";
 import Title from "../title/Title";
