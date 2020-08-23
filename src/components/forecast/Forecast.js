@@ -6,6 +6,7 @@ export default function Forecast(props) {
   const now = new Date();
   const dayNow = now.getDay();
   const month = now.getMonth();
+  console.log(dayNow);
   return (
     <React.Fragment>
       <div
@@ -30,7 +31,6 @@ export default function Forecast(props) {
               id={id}
               dayNow={dayNow}
               month={month}
-              town={""}
             />
           );
         })}

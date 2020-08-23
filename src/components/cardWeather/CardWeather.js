@@ -4,14 +4,15 @@ import "./cardWeather.sass";
 // formating data for UI
 function getDays(dayNow, month, data) {
   const time = data.split(" ")[1].slice(0, 5);
+  const day = data.split(" ")[0].slice(8);
   var days = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
   var months = [
     "January",
@@ -27,26 +28,31 @@ function getDays(dayNow, month, data) {
     "November",
     "December",
   ];
-  return `${days[dayNow]}, ${dayNow} ${months[month]}, ${time}`;
+  return `${days[dayNow]}, ${day} ${months[month]}, ${time}`;
 }
 
 export default function CardWather(props) {
-  if (props.town) {
+  if (props.town === true) {
     var { day } = props;
   } else {
     var { day, id, dayNow, month } = props;
   }
+  console.log(props.day);
   const img = day.weather[0].icon;
   const weather = day.weather[0].main;
   const data = day.dt_txt;
   const { temp, temp_min, temp_max } = day.main;
-
+  const titleCity = () => {
+    return `${day.name}, ${day.sys.country}`;
+  };
   return (
     <div
       className="cities__weather animated fadeIn"
-      onClick={(e) => props.onClickCityDetails(day)}>
+      onClick={(e) => {
+        if (props.town) props.onClickCityDetails(day);
+      }}>
       <div className="cities__weather__name animated fadeIn">
-        {props.town ? day.name : getDays(dayNow, month, data)}
+        {props.town ? titleCity() : getDays(dayNow, month, data)}
       </div>
       <div className="cities__weather__details">
         <img
