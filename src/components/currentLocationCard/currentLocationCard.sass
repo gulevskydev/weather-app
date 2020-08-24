@@ -1,3 +1,4 @@
+@import '../../App'
 .main__weather
     flex: 1 1 100%;
     display: flex;
@@ -12,6 +13,8 @@
     cursor: pointer;
     max-height: 25%
     margin-bottom: 25%
+    @media only screen and (max-width: $bp-tiny) 
+        padding: 2rem;
     &:hover 
         transform: translateY(-2px);
         box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.05);
@@ -24,6 +27,17 @@
         align-items: center;
         justify-content: space-evenly;
         width: 100%;
+        @media only screen and (max-width: $bp-smallest) 
+            width: 11rem;
+      
+
+        @media only screen and (max-width: $bp-tiny) 
+            width: 9rem;
+    &--temp
+        @media only screen and (max-width: $bp-smallest) 
+            font-size: 4.5rem;
+      
+      
     &__city
         font-weight: 500
     &__details--icon

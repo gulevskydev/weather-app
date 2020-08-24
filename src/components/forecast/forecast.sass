@@ -1,5 +1,16 @@
+@import '../../App'
+
 .days
     padding: 2rem
+    &__name
+        @media only screen and (max-width: $bp-smallest) 
+            font-size: 1.5rem;
+        @media only screen and (max-width: $bp-tiny) 
+            font-size: 1.3rem;
+    &__details
+        @media only screen and (max-width: $bp-tiny) 
+          width: 4.5rem;
+      
 .dot 
     margin: 0 5px 
 
@@ -20,6 +31,8 @@
         transition: all 0.2s;
         cursor: pointer;
         margin-bottom: 3rem
+        @media only screen and (max-width: $bp-tiny) 
+            padding: 1rem 1.5rem;
 
        
 
@@ -41,6 +54,10 @@
             font-size: 1.7rem;
             font-weight: 500;
             text-align: center;
+            @media only screen and (max-width: $bp-smallest) 
+                font-size: 1.5rem;
+            @media only screen and (max-width: $bp-tiny) 
+                font-size: 1.3rem;
         &__details 
             display: flex;
             align-items: center;
@@ -50,6 +67,11 @@
                 width: 7rem;
                 height: auto;
                 margin-right: 2rem;
+                @media only screen and (max-width: $bp-smallest) 
+                    width: 6rem;
+                    margin-right: 1rem;
+                @media only screen and (max-width: $bp-tiny) 
+                    width: 5rem;
             &__text 
                 display: flex;
                 flex-direction: column;
@@ -63,6 +85,10 @@
                 font-size: 1.6rem;
                 line-height: 1;
                 margin-bottom: 3px;
+                @media only screen and (max-width: $bp-smallest) 
+                    font-size: 1.5rem;
+                @media only screen and (max-width: $bp-tiny) 
+                    font-size: 1.3rem;
             &--minmax 
                 font-weight: 700;
                 display: flex;
@@ -74,6 +100,10 @@
                 font-size: 3.5rem;
                 line-height: 1;
                 font-weight: 300;
+                @media only screen and (max-width: $bp-smallest) 
+                    font-size: 3rem;
+                @media only screen and (max-width: $bp-tiny) 
+                    font-size: 2.5rem;
 .close-popup 
     align-self: flex-end;
     color: red

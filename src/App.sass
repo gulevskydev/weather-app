@@ -1,3 +1,10 @@
+$bp-largest: 75em; //1200px
+$bp-large: 68.75em; //1110px
+$bp-medium: 56.25em; //900px
+$bp-small: 37.5em; //600px
+$bp-smallest: 31.25em; //500px
+$bp-tiny: 21.75em; //348px
+  
 * 
   margin: 0;
   padding: 0;
@@ -7,6 +14,15 @@
 *::before,
 *::after 
   box-sizing: inherit;
+
+html
+  @media only screen and (max-width: $bp-large) 
+    font-size: 55%;
+  
+
+  @media only screen and (max-width: $bp-small) 
+    font-size: 50%;
+  
   
 body 
   margin: 0;
@@ -32,6 +48,8 @@ body
   padding: 3rem 2rem
   position: relative
   min-width: 35rem
+  @media only screen and (max-width: $bp-tiny) 
+    padding: 2rem 1rem;
 .error
   color:#ff5959
   text-align: center
