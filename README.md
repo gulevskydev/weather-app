@@ -2,6 +2,8 @@
 
 This project uses the [Open Weather Map API](https://openweathermap.org/api)
 
+![Weather-app](/src/img/logo-git.jpg)
+
 ## You can clone it and run:
 
 ```bash
