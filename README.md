@@ -1,5 +1,7 @@
 # Weather App
 
+## [Watch it live](https://gulevskydev-weather-app.netlify.app/)
+
 This project uses the [Open Weather Map API](https://openweathermap.org/api)
 
 ![Weather-app](/src/img/logo-git.jpg)
